@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function Search() {
+export function Search({ send }) {
   const [country, setCountry] = useState("");
 
   const countries = ["Germany", "France", "Italy", "United Kingdom"];
@@ -21,6 +21,8 @@ export function Search() {
           </option>
         ))}
       </select>
+
+      <button onClick={() => send("CONTINUE")}>Continue</button>
     </div>
   );
 }
