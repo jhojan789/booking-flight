@@ -1,7 +1,8 @@
 import React from "react";
 import { useMachine } from "@xstate/react";
 import { bookingMachine } from "../machines/bookMachine";
-import { log } from "xstate/lib/actions";
+import { StepLayout } from "./StepLayout";
+import { Nav } from "../components/Nav";
 
 export function BaseLayout() {
   const [state, send] = useMachine(bookingMachine);
@@ -30,5 +31,11 @@ export function BaseLayout() {
     state.can("START")
   );
   console.log("Current machine", state);
-  return <div>Hello</div>;
+
+  return (
+    <>
+      <Nav state={state} send={send} />
+      <StepLayout state={state} send={send} />
+    </>
+  );
 }
