@@ -8,7 +8,7 @@ export function Search({ send }) {
   const handleChangeCountry = (e) => {
     setCountry(e.target.value);
   };
-  console.log(country);
+  // console.log(country);
   return (
     <div>
       <select value={country} onChange={handleChangeCountry}>
