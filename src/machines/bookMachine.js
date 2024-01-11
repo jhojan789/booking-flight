@@ -15,20 +15,23 @@ export const bookingMachine = createMachine(
             target: "search",
             // actions: "printInit",
           },
-          CLEAN: {
-            target: "init",
-            actions: assign((context, event) => {
-              context.passengers = [];
-              context.selectedCountry = "";
-            }),
-          },
+          // CLEAN: {
+          //   target: "init",
+          //   actions: assign((context, event) => {
+          //     context.passengers = [];
+          //     context.selectedCountry = "";
+          //   }),
+          // },
         },
       },
       search: {
         // entry: "printEntry",
         // exit: "printExit",
         on: {
-          CANCEL: "init",
+          CANCEL: {
+            target: "init",
+            actions: "cleanContext",
+          },
           CONTINUE: {
             target: "passengers",
             actions: assign({
@@ -39,7 +42,10 @@ export const bookingMachine = createMachine(
       },
       passengers: {
         on: {
-          CANCEL: "init",
+          CANCEL: {
+            target: "init",
+            actions: "cleanContext",
+          },
           CONTINUE: "tickets",
           ADD: {
             target: "passengers",
@@ -51,7 +57,10 @@ export const bookingMachine = createMachine(
       },
       tickets: {
         on: {
-          FINISH: "init",
+          FINISH: {
+            target: "init",
+            actions: "cleanContext",
+          },
         },
       },
     },
@@ -61,6 +70,10 @@ export const bookingMachine = createMachine(
       // printInit: () => console.log("Init"),
       // printEntry: () => console.log("Entering to the search"),
       // printExit: () => console.log("Exiting from search"),
+      cleanContext: assign({
+        passengers: [],
+        selectedCountry: "",
+      }),
     },
   }
 );

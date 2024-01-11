@@ -32,11 +32,11 @@ export function BaseLayout() {
   // );
   console.log("Current machine", state.value, state.context);
 
-  useEffect(() => {
-    if (state.matches("init")) {
-      send("CLEAN");
-    }
-  }, [state.value]);
+  // useEffect(() => {
+  //   if (state.matches("init")) {
+  //     send("CLEAN");
+  //   }
+  // }, [state.value]);
   return (
     <>
       <Nav state={state} send={send} />
