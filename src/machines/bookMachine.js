@@ -15,6 +15,13 @@ export const bookingMachine = createMachine(
             target: "search",
             // actions: "printInit",
           },
+          CLEAN: {
+            target: "init",
+            actions: assign((context, event) => {
+              context.passengers = [];
+              context.selectedCountry = "";
+            }),
+          },
         },
       },
       search: {
@@ -34,6 +41,12 @@ export const bookingMachine = createMachine(
         on: {
           CANCEL: "init",
           CONTINUE: "tickets",
+          ADD: {
+            target: "passengers",
+            actions: assign((context, event) =>
+              context.passengers.push(event.selectedPassenger)
+            ),
+          },
         },
       },
       tickets: {
@@ -45,9 +58,9 @@ export const bookingMachine = createMachine(
   },
   {
     actions: {
-      printInit: () => console.log("Init"),
-      printEntry: () => console.log("Entering to the search"),
-      printExit: () => console.log("Exiting from search"),
+      // printInit: () => console.log("Init"),
+      // printEntry: () => console.log("Entering to the search"),
+      // printExit: () => console.log("Exiting from search"),
     },
   }
 );

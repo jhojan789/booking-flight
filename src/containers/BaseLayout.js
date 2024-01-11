@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useMachine } from "@xstate/react";
 import { bookingMachine } from "../machines/bookMachine";
 import { StepLayout } from "./StepLayout";
@@ -32,6 +32,11 @@ export function BaseLayout() {
   // );
   console.log("Current machine", state.value, state.context);
 
+  useEffect(() => {
+    if (state.matches("init")) {
+      send("CLEAN");
+    }
+  }, [state.value]);
   return (
     <>
       <Nav state={state} send={send} />
