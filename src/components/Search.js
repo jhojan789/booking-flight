@@ -22,7 +22,9 @@ export function Search({ send }) {
         ))}
       </select>
 
-      <button onClick={() => send("CONTINUE")}>Continue</button>
+      <button onClick={() => send("CONTINUE", { selectedCountry: country })}>
+        Continue
+      </button>
     </div>
   );
 }

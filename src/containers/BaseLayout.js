@@ -30,7 +30,7 @@ export function BaseLayout() {
   //   "Can I perform START event in the current state?",
   //   state.can("START")
   // );
-  // console.log("Current machine", state);
+  console.log("Current machine", state.value, state.context);
 
   return (
     <>
