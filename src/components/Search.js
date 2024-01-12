@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-export function Search({ send }) {
+export function Search({ state, send }) {
   const [country, setCountry] = useState("");
-
-  const countries = ["Germany", "France", "Italy", "United Kingdom"];
+  // const countries = ["Germany", "France", "Italy", "United Kingdom"];
+  const countries = state.context.countries;
 
   const handleChangeCountry = (e) => {
     setCountry(e.target.value);
@@ -16,8 +16,8 @@ export function Search({ send }) {
           Choose a country...
         </option>
         {countries.map((country, i) => (
-          <option key={i} value={country}>
-            {country}
+          <option key={i} value={country.name.common}>
+            {country.name.common}
           </option>
         ))}
       </select>

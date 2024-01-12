@@ -1,13 +1,30 @@
-import { actions, assign, createMachine } from "xstate";
+import { assign, createMachine } from "xstate";
+import { fetchCountries } from "../utils/api";
 
 const fillCountries = {
   initial: "loading",
   states: {
     loading: {
-      on: {
-        DONE: "success",
-        ERROR: "failure",
+      invoke: {
+        id: "getCountries",
+        src: () => fetchCountries,
+        onDone: {
+          target: "success",
+          actions: assign({
+            countries: (context, event) => event.data,
+          }),
+        },
+        onError: {
+          target: "failure",
+          actions: assign({
+            error: "Request failure",
+          }),
+        },
       },
+      // on: {
+      //   DONE: "success",
+      //   ERROR: "failure",
+      // },
     },
     success: {},
     failure: {
@@ -24,6 +41,8 @@ export const bookingMachine = createMachine(
     context: {
       passengers: [],
       selectedCountry: "",
+      countries: [],
+      error: "",
     },
     states: {
       init: {
@@ -83,41 +102,41 @@ export const bookingMachine = createMachine(
   }
 );
 
-const fillFiles = createMachine({
-  id: "files",
-  type: "parallel",
-  states: {
-    download: {
-      initial: "init",
-      states: {
-        init: {
-          on: {
-            INIT_DOWNLOAD: "loading",
-          },
-        },
-        loading: {
-          on: {
-            DOWNLOAD_CLOMPLETED: "finished",
-          },
-        },
-        finished: {},
-      },
-    },
-    upload: {
-      initial: "init",
-      states: {
-        init: {
-          on: {
-            INIT_UPLOAD: "loading",
-          },
-        },
-        loading: {
-          on: {
-            UPLOAD_COMPLETED: "finished",
-          },
-        },
-        finished: {},
-      },
-    },
-  },
-});
+// const fillFiles = createMachine({
+//   id: "files",
+//   type: "parallel",
+//   states: {
+//     download: {
+//       initial: "init",
+//       states: {
+//         init: {
+//           on: {
+//             INIT_DOWNLOAD: "loading",
+//           },
+//         },
+//         loading: {
+//           on: {
+//             DOWNLOAD_CLOMPLETED: "finished",
+//           },
+//         },
+//         finished: {},
+//       },
+//     },
+//     upload: {
+//       initial: "init",
+//       states: {
+//         init: {
+//           on: {
+//             INIT_UPLOAD: "loading",
+//           },
+//         },
+//         loading: {
+//           on: {
+//             UPLOAD_COMPLETED: "finished",
+//           },
+//         },
+//         finished: {},
+//       },
+//     },
+//   },
+// });

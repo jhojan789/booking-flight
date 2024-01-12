@@ -7,7 +7,7 @@ import { Tickets } from "../components/Tickets";
 export function StepLayout({ state, send }) {
   const renderContent = () => {
     if (state.matches("init")) return <Welcome send={send} />;
-    if (state.matches("search")) return <Search send={send} />;
+    if (state.matches("search")) return <Search state={state} send={send} />;
     if (state.matches("passengers"))
       return <Passengers state={state} send={send} />;
     if (state.matches("tickets")) return <Tickets send={send} />;
