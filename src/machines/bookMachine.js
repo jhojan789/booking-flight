@@ -36,6 +36,7 @@ const fillCountries = {
 };
 export const bookingMachine = createMachine(
   {
+    predictableActionArguments: true,
     id: "buy plane tickets",
     initial: "init",
     context: {
@@ -89,15 +90,30 @@ export const bookingMachine = createMachine(
             actions: "cleanContext",
           },
         },
+        after: {
+          5000: {
+            target: "init",
+            actions: "cleanContext",
+          },
+        },
       },
     },
   },
   {
     actions: {
-      cleanContext: assign({
-        passengers: [],
-        selectedCountry: "",
-      }),
+      cleanContext: assign(
+        (context, event) => {
+          context.passengers = [];
+          context.selectedCountry = "";
+          context.countries = [];
+          context.error = "";
+        }
+        //   {
+        //   passengers: [],
+        //   selectedCountry: "",
+        //   countries: [],
+        // }
+      ),
     },
   }
 );

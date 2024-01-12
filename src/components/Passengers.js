@@ -6,6 +6,7 @@ export function Passengers({ state, send }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     send("ADD", { selectedPassenger: name });
+    setName("");
   };
   return (
     <div>
