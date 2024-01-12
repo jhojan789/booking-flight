@@ -82,3 +82,42 @@ export const bookingMachine = createMachine(
     },
   }
 );
+
+const fillFiles = createMachine({
+  id: "files",
+  type: "parallel",
+  states: {
+    download: {
+      initial: "init",
+      states: {
+        init: {
+          on: {
+            INIT_DOWNLOAD: "loading",
+          },
+        },
+        loading: {
+          on: {
+            DOWNLOAD_CLOMPLETED: "finished",
+          },
+        },
+        finished: {},
+      },
+    },
+    upload: {
+      initial: "init",
+      states: {
+        init: {
+          on: {
+            INIT_UPLOAD: "loading",
+          },
+        },
+        loading: {
+          on: {
+            UPLOAD_COMPLETED: "finished",
+          },
+        },
+        finished: {},
+      },
+    },
+  },
+});
