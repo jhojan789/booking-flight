@@ -74,7 +74,10 @@ export const bookingMachine = createMachine(
             target: "init",
             actions: "cleanContext",
           },
-          CONTINUE: "tickets",
+          CONTINUE: {
+            target: "tickets",
+            cond: "isMoreThan0",
+          },
           ADD: {
             target: "passengers",
             actions: assign((context, event) =>
@@ -114,6 +117,11 @@ export const bookingMachine = createMachine(
         //   countries: [],
         // }
       ),
+    },
+    guards: {
+      isMoreThan0: (context) => {
+        return context.passengers.length > 0;
+      },
     },
   }
 );
