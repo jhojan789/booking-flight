@@ -14,7 +14,11 @@ export function Passengers({ state, send }) {
         <p key={i}>{p}</p>
       ))}
       <form onSubmit={handleSubmit}>
-        <input value={name} onChange={(e) => setName(e.target.value)} />
+        <input
+          value={name}
+          required
+          onChange={(e) => setName(e.target.value)}
+        />
         <button type="submit">Add</button>
         <button type="button" onClick={() => send("CONTINUE")}>
           Continue

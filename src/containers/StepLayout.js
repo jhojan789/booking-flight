@@ -10,7 +10,8 @@ export function StepLayout({ state, send }) {
     if (state.matches("search")) return <Search state={state} send={send} />;
     if (state.matches("passengers"))
       return <Passengers state={state} send={send} />;
-    if (state.matches("tickets")) return <Tickets send={send} />;
+    if (state.matches("tickets"))
+      return <Tickets context={state.context} send={send} />;
 
     return null;
   };
