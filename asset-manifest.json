@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/booking-flight/static/css/main.31d6cfe0.css",
+    "main.js": "/booking-flight/static/js/main.2be40862.js",
+    "static/media/logo.svg": "/booking-flight/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/booking-flight/index.html",
+    "main.2be40862.js.map": "/booking-flight/static/js/main.2be40862.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.2be40862.js"
+  ]
+}
